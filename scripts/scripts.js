@@ -3,7 +3,7 @@ function operate(operator, x, y) {
         return add(x, y);
     } else if (operator === '-') {
         return subtract(x, y);
-    } else if (operator === 'x') {
+    } else if (operator === 'x' || operator === '*') {
         return multiply(x, y);
     } else if (operator === '/') {
         return divide(x, y);
