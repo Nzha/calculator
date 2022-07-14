@@ -16,6 +16,7 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
+    background-color: #84cfe4;
 }
 
 .content {
@@ -24,4 +25,22 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.calculator {
+    border: 1px solid black;
+    width: 400px;
+    height: 500px;
+}
+
+.calculator-top {
+    background-color: #4b5561;
+}
+
+.display {
+    background-color: #c8cac7;
+}
+
+.calculator-pad {
+    background-color: #f2f3f5;
 }

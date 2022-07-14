@@ -1,4 +1,4 @@
-function operate(operator, x, y) {
+function operate(x, operator, y) {
     if (operator === '+') {
         return add(x, y);
     } else if (operator === '-') {
