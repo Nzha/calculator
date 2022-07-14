@@ -42,5 +42,23 @@ body {
 }
 
 .calculator-pad {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     background-color: #f2f3f5;
+}
+
+button {
+    color: white;
+}
+
+#AC {
+    background-color: #ef4136;
+}
+
+.operators {
+    background-color: #4e5462;
+}
+
+.digits {
+    background-color: #6b7c8c;
 }
