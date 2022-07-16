@@ -28,23 +28,32 @@ body {
 }
 
 .calculator {
-    border: 1px solid black;
-    width: 400px;
-    height: 500px;
+    width: 325px;
+    /* height: 500px; */
 }
 
 .calculator-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #4b5561;
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
 }
 
 .display {
     background-color: #c8cac7;
+    width: 100%;
+    text-align: right;
+    font-size: 3em;
 }
 
 .calculator-pad {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 0.7rem;
+    padding: 20px;
+    border-radius: 0 0 15px 15px;;
     background-color: #f2f3f5;
 }
 
