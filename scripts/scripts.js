@@ -8,6 +8,7 @@ const equal = document.querySelector('#equal');
 let input = {};
 let numberCount = 1;
 let operatorCount = 1;
+let result = 0;
 
 digits.forEach(digit => digit.addEventListener('click', displayInput));
 operators.forEach(operator => operator.addEventListener('click', displayOperator));
@@ -15,6 +16,9 @@ ac.addEventListener('click', clear);
 equal.addEventListener('click', displayResult);
 
 function displayInput(e) {
+    // Clear display if user has already done an operation and then pick a digit
+    if (result !== 0) clear();
+
     value = `value${numberCount}`;
     if (!input[value]) input[value] = '';
     input[value] += e.target.textContent;
@@ -30,20 +34,27 @@ function displayInput(e) {
 function displayOperator(e){
     // Stop user from starting with an operator
     if (!input[value]) return;
-    operator = `operator${operatorCount}`;
-    if (!input[operator]) input[operator] = '';
-    input[operator] += e.target.textContent;
-    displayTop.textContent = Object.values(input).join(' ');
-    console.log(input);
-    numberCount++;
-    operatorCount++;
+
+    // Continue operation if user has already done an operation and then pick an operator
+    if (result !== 0) {
+        displayTop.textContent = result;
+        displayBottom.textContent = '';
+    // Else start the first operation
+    } else {
+        operator = `operator${operatorCount}`;
+        if (!input[operator]) input[operator] = '';
+        input[operator] += e.target.textContent;
+        displayTop.textContent = Object.values(input).join(' ');
+        console.log(input);
+        numberCount++;
+        operatorCount++;
+    }
 }
 
 function displayResult() {
-    let result = operate(parseInt(input.value1), input.operator1, parseInt(input.value2));
-    console.log(result);
+    result = operate(parseInt(input.value1), input.operator1, parseInt(input.value2));
     displayBottom.textContent = result;
-    // clear();
+    console.log(result);
 }
 
 function clear() {
@@ -51,6 +62,7 @@ function clear() {
     for (let key in input) delete input[key];
     numberCount = 1;
     operatorCount = 1;
+    result = 0;
     displayTop.textContent = '';
     displayBottom.textContent = '';
 }
