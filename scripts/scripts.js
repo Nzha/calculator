@@ -19,6 +19,11 @@ function displayInput(e) {
         input[value] = '';
     }
     input[value] += e.target.textContent;
+
+    /**
+    * Object.values return an array of object property values separated by a comma
+    * Join(' ') returns an array as a string with a white space as separator
+    */
     displayTop.textContent = Object.values(input).join(' ');
     console.log(input);
 }
