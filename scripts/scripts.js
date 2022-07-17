@@ -30,6 +30,9 @@ function displayInput(e) {
 }
 
 function displayOperator(e){
+    if(!input[value]) {
+        return;
+    }
     operator = `operator${operatorCount}`;
     if (!input[operator]) {
         input[operator] = '';
@@ -45,6 +48,7 @@ function displayResult() {
     let result = operate(parseInt(input.value1), input.operator1, parseInt(input.value2));
     console.log(result);
     displayBottom.textContent = result;
+    // clear();
 }
 
 function clear() {
