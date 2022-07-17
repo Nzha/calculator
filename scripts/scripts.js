@@ -16,9 +16,7 @@ equal.addEventListener('click', displayResult);
 
 function displayInput(e) {
     value = `value${numberCount}`;
-    if (!input[value]) {
-        input[value] = '';
-    }
+    if (!input[value]) input[value] = '';
     input[value] += e.target.textContent;
 
     /**
@@ -30,13 +28,10 @@ function displayInput(e) {
 }
 
 function displayOperator(e){
-    if(!input[value]) {
-        return;
-    }
+    // Stop user from starting with an operator
+    if (!input[value]) return;
     operator = `operator${operatorCount}`;
-    if (!input[operator]) {
-        input[operator] = '';
-    }
+    if (!input[operator]) input[operator] = '';
     input[operator] += e.target.textContent;
     displayTop.textContent = Object.values(input).join(' ');
     console.log(input);
