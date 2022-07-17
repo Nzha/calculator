@@ -1,3 +1,13 @@
+const digits = document.querySelectorAll('.digits');
+const displayTop = document.querySelector('.display-top');
+
+digits.forEach(digit => digit.addEventListener('click', displayDigits));
+
+function displayDigits(e) {
+    console.log(e.target.textContent);
+    displayTop.textContent += e.target.textContent;
+}
+
 function operate(x, operator, y) {
     if (operator === '+') {
         return add(x, y);
