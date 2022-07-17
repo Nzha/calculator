@@ -19,7 +19,7 @@ function displayInput(e) {
         input[value] = '';
     }
     input[value] += e.target.textContent;
-    displayTop.textContent = input[value];
+    displayTop.textContent = Object.values(input).join(' ');
     console.log(input);
 }
 
@@ -29,13 +29,14 @@ function displayOperator(e){
         input[operator] = '';
     }
     input[operator] += e.target.textContent;
-    displayTop.textContent += input[operator];
+    displayTop.textContent = Object.values(input).join(' ');
     console.log(input);
     numberCount++;
     operatorCount++;
 }
 
 function clear() {
+    // Clear input object
     for (let key in input) delete input[key];
     numberCount = 1;
     operatorCount = 1;
