@@ -1,6 +1,7 @@
 const digits = document.querySelectorAll('.digits');
-const operators = document.querySelectorAll('.operators');
+const operators = document.querySelectorAll('.operators.display');
 const displayTop = document.querySelector('.display-top');
+const displayBottom = document.querySelector('.display-bottom');
 const ac = document.querySelector('#AC');
 const equal = document.querySelector('#equal');
 
@@ -40,16 +41,19 @@ function displayOperator(e){
     operatorCount++;
 }
 
+function displayResult() {
+    let result = operate(parseInt(input.value1), input.operator1, parseInt(input.value2));
+    console.log(result);
+    displayBottom.textContent = result;
+}
+
 function clear() {
     // Clear input object
     for (let key in input) delete input[key];
     numberCount = 1;
     operatorCount = 1;
     displayTop.textContent = '';
-}
-
-function displayResult() {
-    console.log(parseInt(displayTop.textContent));
+    displayBottom.textContent = '';
 }
 
 function operate(x, operator, y) {
