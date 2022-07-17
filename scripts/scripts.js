@@ -1,4 +1,3 @@
-// const displayBtns = document.querySelectorAll('.display');
 const digits = document.querySelectorAll('.digits');
 const operators = document.querySelectorAll('.operators');
 const displayTop = document.querySelector('.display-top');
@@ -6,12 +5,11 @@ const ac = document.querySelector('#AC');
 const equal = document.querySelector('#equal');
 
 let input = {};
-let numberCount = 0;
-let operatorCount = 0;
+let numberCount = 1;
+let operatorCount = 1;
 
 digits.forEach(digit => digit.addEventListener('click', displayInput));
 operators.forEach(operator => operator.addEventListener('click', displayOperator));
-// displayBtns.forEach(displayBtn => displayBtn.addEventListener('click', displayInput));
 ac.addEventListener('click', clear);
 equal.addEventListener('click', displayResult);
 
@@ -38,7 +36,9 @@ function displayOperator(e){
 }
 
 function clear() {
-    input = '';
+    for (let key in input) delete input[key];
+    numberCount = 1;
+    operatorCount = 1;
     displayTop.textContent = '';
 }
 
