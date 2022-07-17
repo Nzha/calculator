@@ -16,13 +16,13 @@ ac.addEventListener('click', clear);
 equal.addEventListener('click', displayResult);
 
 function displayInput(e) {
-        value = `value${numberCount}`;
-        if (!input[value]) {
-            input[value] = '';
-        }
-        input[value] += e.target.textContent;
-        displayTop.textContent = input[value];
-        console.log(input);
+    value = `value${numberCount}`;
+    if (!input[value]) {
+        input[value] = '';
+    }
+    input[value] += e.target.textContent;
+    displayTop.textContent = input[value];
+    console.log(input);
 }
 
 function displayOperator(e){
