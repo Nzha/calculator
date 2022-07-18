@@ -37,34 +37,21 @@ function displayOperator(e){
 
     // Continue operation if user has already done an operation and then pick an operator
     if (result !== 0) {
-        // input.value1 = result;
-        // displayTop.textContent = result;
-        // displayBottom.textContent = '';
-        // console.log(input);
         for (let key in input) delete input[key];
         numberCount = 1;
         operatorCount = 1;
         input.value1 = result;
         result = 0;
-        operator = `operator${operatorCount}`;
-        if (!input[operator]) input[operator] = '';
-        input[operator] += e.target.textContent;
-        displayTop.textContent = Object.values(input).join(' ');
         displayBottom.textContent = '';
-        console.log(input);
-        console.log(result)
-        numberCount++;
-        operatorCount++;
-    // Else start the first operation
-    } else {
-        operator = `operator${operatorCount}`;
-        if (!input[operator]) input[operator] = '';
-        input[operator] += e.target.textContent;
-        displayTop.textContent = Object.values(input).join(' ');
-        console.log(input);
-        numberCount++;
-        operatorCount++;
     }
+    // Else start the first operation
+    operator = `operator${operatorCount}`;
+    if (!input[operator]) input[operator] = '';
+    input[operator] += e.target.textContent;
+    displayTop.textContent = Object.values(input).join(' ');
+    numberCount++;
+    operatorCount++;
+    console.log(input);
 }
 
 function displayResult() {
