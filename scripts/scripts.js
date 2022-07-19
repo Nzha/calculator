@@ -5,10 +5,13 @@ const displayBottom = document.querySelector('.display-bottom');
 const ac = document.querySelector('#AC');
 const equal = document.querySelector('#equal');
 
-let input = {};
+// let input = {};
+let input = [];
 let numberCount = 1;
 let operatorCount = 1;
 let result = 0;
+
+window.addEventListener('keydown', displayInput);
 
 digits.forEach(digit => digit.addEventListener('click', displayInput));
 operators.forEach(operator => operator.addEventListener('click', displayOperator));
@@ -21,7 +24,16 @@ function displayInput(e) {
 
     value = `value${numberCount}`;
     if (!input[value]) input[value] = '';
-    input[value] += e.target.textContent;
+
+    // User can enter digits via clicking UI or pressing keyboard
+    if (e instanceof KeyboardEvent) {
+        let pattern = /[0-9]/;
+        if (pattern.test(e.key)) {
+            input[value] += e.key;
+        }
+    } else {
+        input[value] += e.target.textContent;
+    }
 
     /**
     * Object.values return an array of object property values separated by a comma
