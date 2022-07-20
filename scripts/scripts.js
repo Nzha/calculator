@@ -11,14 +11,37 @@ let numberCount = 1;
 let operatorCount = 1;
 let result = 0;
 
-window.addEventListener('keydown', displayInput);
+// window.addEventListener('keydown', (e) => {
+//     getDigits(e);
+//     getOperators(e);
+// });
 
-digits.forEach(digit => digit.addEventListener('click', displayInput));
-operators.forEach(operator => operator.addEventListener('click', displayOperator));
+window.addEventListener('keydown', getInput);
+
+digits.forEach(digit => digit.addEventListener('click', getInput));
+operators.forEach(operator => operator.addEventListener('click', getInput));
 ac.addEventListener('click', clear);
 equal.addEventListener('click', displayResult);
 
-function displayInput(e) {
+function getInput(e) {
+    let digits = /\d/;
+    let operators = /\%|\/|\+|\-|\*|x/;
+
+    // Compare user input via mouse or keyboard against regex patterns and call correct function
+    if (
+      (e instanceof KeyboardEvent && digits.test(e.key))
+      || (e instanceof MouseEvent && digits.test(e.target.textContent))
+    ) {
+        getDigits(e);
+    } else if (
+      (e instanceof KeyboardEvent && operators.test(e.key))
+      || (e instanceof MouseEvent && operators.test(e.target.textContent))
+    ) {    
+        getOperators(e);
+    }
+}
+
+function getDigits(e) {
     // Clear display if user has already done an operation and then pick a digit
     if (result !== 0) clear();
 
@@ -27,10 +50,7 @@ function displayInput(e) {
 
     // User can enter digits via clicking UI or pressing keyboard
     if (e instanceof KeyboardEvent) {
-        let pattern = /[0-9]/;
-        if (pattern.test(e.key)) {
-            input[value] += e.key;
-        }
+        input[value] += e.key;
     } else {
         input[value] += e.target.textContent;
     }
@@ -43,7 +63,7 @@ function displayInput(e) {
     console.log(input);
 }
 
-function displayOperator(e){
+function getOperators(e){
     // Stop user from starting with an operator
     if (!input[value]) return;
 
@@ -59,7 +79,13 @@ function displayOperator(e){
     // Else start the first operation
     operator = `operator${operatorCount}`;
     if (!input[operator]) input[operator] = '';
-    input[operator] += e.target.textContent;
+
+    if (e instanceof KeyboardEvent) {
+        input[operator] += e.key;
+    } else {
+        input[operator] += e.target.textContent;
+    }
+
     displayTop.textContent = Object.values(input).join(' ');
     numberCount++;
     operatorCount++;
@@ -75,6 +101,7 @@ function displayResult() {
 function clear() {
     // Clear input object
     for (let key in input) delete input[key];
+
     numberCount = 1;
     operatorCount = 1;
     result = 0;
