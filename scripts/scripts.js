@@ -18,8 +18,8 @@ let result = 0;
 
 window.addEventListener('keydown', getInput);
 
-digits.forEach(digit => digit.addEventListener('click', getInput));
-operators.forEach(operator => operator.addEventListener('click', getInput));
+digits.forEach(digit => digit.addEventListener('click', getDigits));
+operators.forEach(operator => operator.addEventListener('click', getOperators));
 ac.addEventListener('click', clear);
 equal.addEventListener('click', displayResult);
 
@@ -27,18 +27,9 @@ function getInput(e) {
     let digits = /\d/;
     let operators = /\%|\/|\+|\-|\*|x/;
 
-    // Compare user input via mouse or keyboard against regex patterns and call correct function
-    if (
-      (e instanceof KeyboardEvent && digits.test(e.key))
-      || (e instanceof MouseEvent && digits.test(e.target.textContent))
-    ) {
-        getDigits(e);
-    } else if (
-      (e instanceof KeyboardEvent && operators.test(e.key))
-      || (e instanceof MouseEvent && operators.test(e.target.textContent))
-    ) {    
-        getOperators(e);
-    }
+    // Compare user keyboard input against regex patterns and call correct function
+    if (digits.test(e.key)) getDigits(e);
+    if (operators.test(e.key)) getOperators(e);
 }
 
 function getDigits(e) {
