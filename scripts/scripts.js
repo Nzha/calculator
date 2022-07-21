@@ -11,25 +11,23 @@ let numberCount = 1;
 let operatorCount = 1;
 let result = 0;
 
-// window.addEventListener('keydown', (e) => {
-//     getDigits(e);
-//     getOperators(e);
-// });
-
-window.addEventListener('keydown', getInput);
+window.addEventListener('keydown', getKeyboardInput);
 
 digits.forEach(digit => digit.addEventListener('click', getDigits));
 operators.forEach(operator => operator.addEventListener('click', getOperators));
 ac.addEventListener('click', clear);
 equal.addEventListener('click', displayResult);
 
-function getInput(e) {
-    let digits = /\d/;
+function getKeyboardInput(e) {
+    let digits = /^\d+$/;
     let operators = /\%|\/|\+|\-|\*|x/;
 
     // Compare user keyboard input against regex patterns and call correct function
     if (digits.test(e.key)) getDigits(e);
     if (operators.test(e.key)) getOperators(e);
+
+    if (e.key === 'Enter') calcResult();
+    if (e.key === 'Delete') clear();
 }
 
 function getDigits(e) {
@@ -83,7 +81,7 @@ function getOperators(e){
     console.log(input);
 }
 
-function displayResult() {
+function calcResult() {
     result = operate(parseInt(input.value1), input.operator1, parseInt(input.value2));
     displayBottom.textContent = result;
     console.log(result);
