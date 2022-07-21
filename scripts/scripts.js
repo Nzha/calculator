@@ -16,7 +16,7 @@ window.addEventListener('keydown', getKeyboardInput);
 digits.forEach(digit => digit.addEventListener('click', getDigits));
 operators.forEach(operator => operator.addEventListener('click', getOperators));
 ac.addEventListener('click', clear);
-equal.addEventListener('click', displayResult);
+equal.addEventListener('click', calcResult);
 
 function getKeyboardInput(e) {
     let digits = /^\d+$/;
