@@ -5,11 +5,18 @@ const displayBottom = document.querySelector('.display-bottom');
 const ac = document.querySelector('#AC');
 const equal = document.querySelector('#equal');
 
-// let input = {};
-let input = [];
+let input = {};
+// let input = [];
 let numberCount = 1;
 let operatorCount = 1;
 let result = 0;
+
+
+
+let myArray = [];
+myArray.push(input);
+
+
 
 window.addEventListener('keydown', getKeyboardInput);
 
@@ -55,6 +62,53 @@ function getDigits(e) {
 function getOperators(e){
     // Stop user from starting with an operator
     if (!input[value]) return;
+
+
+
+    
+    // for (item in input) {
+    //     // let test = input.indexOf('+');
+    //     // console.log('test');
+
+    //     // pos = myArray.map(function(e) { console.log('test') }).indexOf('operator1');
+    //     // console.log(pos);
+
+    //     console.log(item);
+    // }
+
+    // for (let i = 0; i < Object.keys(input).length; i++) {
+    //     console.log(Object.keys(input)[i]);
+    //     if (Object.keys(input)[i].includes('operator')) {
+    //         console.log('works');
+    //     }
+    // }
+
+    // for (let key in input) {
+    //     console.log(key)
+    //     // if (key.includes('operator')) {
+    //     //     console.log('operator!');
+    //     // }
+    // }
+
+
+    // let keys = Object.keys(input).sort();
+    // let test = keys.indexOf('operator')
+    // console.log(test);
+
+    // console.log(operatorCount);
+    // console.log(`operator${operatorCount}`);
+    // console.log(input[`operator${operatorCount-1}`]);
+
+    // console.log(operatorCount);
+    // if (`operator${operatorCount-1}` in input) {
+    //     console.log('works');
+    // }
+
+    // for (let i = 0; i < myArray.length; i++) {
+    //     console.log(`Test: ${myArray[0]}`);
+    // }
+
+
 
     // Continue operation if user has already done an operation and then pick an operator
     if (result !== 0) {
@@ -107,6 +161,8 @@ function operate(x, operator, y) {
         return multiply(x, y);
     } else if (operator === '/') {
         return divide(x, y);
+    } else if (operator === '%') {
+        return modulus(x, y);
     }
 }
 
@@ -124,4 +180,8 @@ function multiply(x, y) {
 
 function divide(x, y) {
     return x / y;
+}
+
+function modulus(x, y) {
+    return x % y;
 }
