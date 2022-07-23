@@ -136,7 +136,17 @@ function getOperators(e){
 }
 
 function calcResult() {
-    result = operate(parseInt(input.value1), input.operator1, parseInt(input.value2));
+    // result = operate(parseInt(input.value1), input.operator1, parseInt(input.value2));
+
+   
+    result = Object.values(input);
+    test = result.map((element, index) => {
+        return (index % 2 === 0) ? parseInt(element) : element; 
+    });
+
+    console.log(test);
+
+
     displayBottom.textContent = result;
     console.log(result);
 }
