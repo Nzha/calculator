@@ -171,12 +171,14 @@ function calc(arr) {
             arr.splice(i, 1, test2)
             arr.splice(i+1, 1);
             arr.splice(i-1, 1);
+            return calc(arr);
             // console.log(arr);
         } else if (arr[i] === '/') {
             test2 = arr[i-1] / arr[i+1];
             arr.splice(i, 1, test2)
             arr.splice(i+1, 1);
             arr.splice(i-1, 1);
+            return calc(arr);
             // console.log(arr);
         }
     }
@@ -190,18 +192,18 @@ function calc(arr) {
             arr.splice(i+1, 1);
             arr.splice(i-1, 1);
             // console.log(arr);
+            return calc(arr);
         } else if (arr[i] === '-') {
             test2 = arr[i-1] - arr[i+1];
             arr.splice(i, 1, test2)
             arr.splice(i+1, 1);
             arr.splice(i-1, 1);
             // console.log(arr);
+            return calc(arr);
         }
     }
     console.log(arr);
     return calc(arr);
-
-
 }
 
 function clear() {
