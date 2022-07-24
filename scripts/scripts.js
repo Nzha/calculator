@@ -165,36 +165,24 @@ function calc(arr) {
 
     // Loop through array and do multiplications and divisions first
     for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === '*') {
-            resultOp = arr[i-1] * arr[i+1];
+        if (arr[i] === '*' || arr[i] === '/') {
+            resultOp = operate(arr[i-1], arr[i], arr[i+1]);
             updateArr(arr, i, resultOp)
             return calc(arr);
-            // console.log(arr);
-        } else if (arr[i] === '/') {
-            resultOp = arr[i-1] / arr[i+1];
-            updateArr(arr, i, resultOp)
-            return calc(arr);
-            // console.log(arr);
         }
     }
     console.log(arr);
 
     // Then loop again and do additions and subtractions
     for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === '+') {
-            resultOp = arr[i-1] + arr[i+1];
+        if (arr[i] === '+' || arr[i] === '-') {
+            resultOp = operate(arr[i-1], arr[i], arr[i+1]);
             updateArr(arr, i, resultOp)
-            // console.log(arr);
-            return calc(arr);
-        } else if (arr[i] === '-') {
-            resultOp = arr[i-1] - arr[i+1];
-            updateArr(arr, i, resultOp)
-            // console.log(arr);
             return calc(arr);
         }
     }
     console.log(arr);
-    // return calc(arr);
+
 }
 
 function clear() {
