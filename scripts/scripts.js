@@ -136,8 +136,8 @@ function getOperators(e){
 }
 
 function calcResult() {
-    result = operate(parseInt(input.value1), input.operator1, parseInt(input.value2));
-    displayBottom.textContent = result;
+    // result = operate(parseInt(input.value1), input.operator1, parseInt(input.value2));
+    // displayBottom.textContent = result;
     // console.log(result);
 
 
@@ -146,27 +146,47 @@ function calcResult() {
     test = result2.map((element, index) => {
         return (index % 2 === 0) ? parseInt(element) : element; 
     });
-    calc(test);
+    result = calc(test);
+    displayBottom.textContent = result;
 }
 
 function calc(arr) {
-
-    // arr = Object.values(input);
-    // console.log(arr);
-    // test = arr.map((element, index) => {
-    //     return (index % 2 === 0) ? parseInt(element) : element; 
-    // });
-
     console.log(arr);
 
+    // If only one operation left (e.g '3 + 5'), return result. Else, keep doing operations.
     if (arr.length === 3) {
         console.log(operate(arr[0], arr[1], arr[2]));
         return operate(arr[0], arr[1], arr[2]);
     }
 
+    // Loop through array and do multiplications and divisions first
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] === '*') {
             test2 = arr[i-1] * arr[i+1];
+            arr.splice(i, 1, test2)
+            arr.splice(i+1, 1);
+            arr.splice(i-1, 1);
+            // console.log(arr);
+        } else if (arr[i] === '/') {
+            test2 = arr[i-1] / arr[i+1];
+            arr.splice(i, 1, test2)
+            arr.splice(i+1, 1);
+            arr.splice(i-1, 1);
+            // console.log(arr);
+        }
+    }
+    console.log(arr);
+
+    // Then loop again and do additions and subtractions
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === '+') {
+            test2 = arr[i-1] + arr[i+1];
+            arr.splice(i, 1, test2)
+            arr.splice(i+1, 1);
+            arr.splice(i-1, 1);
+            // console.log(arr);
+        } else if (arr[i] === '-') {
+            test2 = arr[i-1] - arr[i+1];
             arr.splice(i, 1, test2)
             arr.splice(i+1, 1);
             arr.splice(i-1, 1);
@@ -175,8 +195,6 @@ function calc(arr) {
     }
     console.log(arr);
     return calc(arr);
-
-
 }
 
 function clear() {
