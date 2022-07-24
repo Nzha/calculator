@@ -154,9 +154,14 @@ function calc(arr) {
     console.log(arr);
 
     // If only one operation left (e.g '3 + 5'), return result. Else, keep doing operations.
-    if (arr.length === 3) {
-        console.log(operate(arr[0], arr[1], arr[2]));
-        return operate(arr[0], arr[1], arr[2]);
+    // if (arr.length === 3) {
+    //     console.log(operate(arr[0], arr[1], arr[2]));
+    //     return operate(arr[0], arr[1], arr[2]);
+    // }
+
+    // If only no operation left, return result. Else, keep doing operations.
+    if (arr.length === 1) {
+        return arr[0];
     }
 
     // Loop through array and do multiplications and divisions first
@@ -195,6 +200,8 @@ function calc(arr) {
     }
     console.log(arr);
     return calc(arr);
+
+
 }
 
 function clear() {
