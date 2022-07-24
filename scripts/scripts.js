@@ -136,9 +136,10 @@ function getOperators(e){
 }
 
 function calcResult() {
+    // Return an array of the object property values (i.e. numbers and operators)
     inputValues = Object.values(input);
 
-    // Change every number (i.e every other element) to integer
+    // Change every number in the array (i.e. every other element) to integer
     inputValuesInt = inputValues.map((element, index) => {
         return (index % 2 === 0) ? parseInt(element) : element; 
     });
@@ -150,7 +151,7 @@ function calcResult() {
 function calc(arr) {
     console.log(arr);
 
-    // Insert operation result in array and remove previous & next value (e.g  [6 + 3] => [9])
+    // Insert operation result in array and remove previous & next value (e.g.  [6 + 3] => [9])
     function updateArr(arr, index, newValue) {
         arr.splice(index, 1, newValue)
         arr.splice(index + 1, 1);
