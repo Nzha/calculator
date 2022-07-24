@@ -140,33 +140,42 @@ function calcResult() {
     displayBottom.textContent = result;
     // console.log(result);
 
-    calc();
-}
-
-function calc() {
 
     result2 = Object.values(input);
     // console.log(result2);
     test = result2.map((element, index) => {
         return (index % 2 === 0) ? parseInt(element) : element; 
     });
+    calc(test);
+}
 
-    console.log(test);
+function calc(arr) {
 
-    if (test.length === 3) {
-        console.log(operate(test[0], test[1], test[2]));
-        return operate(test[0], test[1], test[2]);
+    // arr = Object.values(input);
+    // console.log(arr);
+    // test = arr.map((element, index) => {
+    //     return (index % 2 === 0) ? parseInt(element) : element; 
+    // });
+
+    console.log(arr);
+
+    if (arr.length === 3) {
+        console.log(operate(arr[0], arr[1], arr[2]));
+        return operate(arr[0], arr[1], arr[2]);
     }
 
-    for (let i = 0; i < test.length; i++) {
-        if (test[i] === '*') {
-            test2 = test[i-1] * test[i+1];
-            test.splice(i, 1, test2)
-            test.splice(i+1, 1);
-            test.splice(i-1, 1);
-            console.log(test);
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === '*') {
+            test2 = arr[i-1] * arr[i+1];
+            arr.splice(i, 1, test2)
+            arr.splice(i+1, 1);
+            arr.splice(i-1, 1);
+            // console.log(arr);
         }
     }
+    console.log(arr);
+    return calc(arr);
+
 
 }
 
