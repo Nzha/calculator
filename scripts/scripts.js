@@ -153,31 +153,26 @@ function calcResult() {
 function calc(arr) {
     console.log(arr);
 
-    // If only one operation left (e.g '3 + 5'), return result. Else, keep doing operations.
-    // if (arr.length === 3) {
-    //     console.log(operate(arr[0], arr[1], arr[2]));
-    //     return operate(arr[0], arr[1], arr[2]);
-    // }
-
-    // If only no operation left, return result. Else, keep doing operations.
-    if (arr.length === 1) {
-        return arr[0];
+    // Insert operation result in array and remove previous and next value (e.g  [6 + 3] => [9])
+    function updateArr(arr, index, newValue) {
+        arr.splice(index, 1, newValue)
+        arr.splice(index + 1, 1);
+        arr.splice(index - 1, 1);
     }
+
+    // If no operation left, return result. Else, keep doing operations.
+    if (arr.length === 1) return arr[0];
 
     // Loop through array and do multiplications and divisions first
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] === '*') {
-            test2 = arr[i-1] * arr[i+1];
-            arr.splice(i, 1, test2)
-            arr.splice(i+1, 1);
-            arr.splice(i-1, 1);
+            resultOp = arr[i-1] * arr[i+1];
+            updateArr(arr, i, resultOp)
             return calc(arr);
             // console.log(arr);
         } else if (arr[i] === '/') {
-            test2 = arr[i-1] / arr[i+1];
-            arr.splice(i, 1, test2)
-            arr.splice(i+1, 1);
-            arr.splice(i-1, 1);
+            resultOp = arr[i-1] / arr[i+1];
+            updateArr(arr, i, resultOp)
             return calc(arr);
             // console.log(arr);
         }
@@ -187,23 +182,19 @@ function calc(arr) {
     // Then loop again and do additions and subtractions
     for (let i = 0; i < arr.length; i++) {
         if (arr[i] === '+') {
-            test2 = arr[i-1] + arr[i+1];
-            arr.splice(i, 1, test2)
-            arr.splice(i+1, 1);
-            arr.splice(i-1, 1);
+            resultOp = arr[i-1] + arr[i+1];
+            updateArr(arr, i, resultOp)
             // console.log(arr);
             return calc(arr);
         } else if (arr[i] === '-') {
-            test2 = arr[i-1] - arr[i+1];
-            arr.splice(i, 1, test2)
-            arr.splice(i+1, 1);
-            arr.splice(i-1, 1);
+            resultOp = arr[i-1] - arr[i+1];
+            updateArr(arr, i, resultOp)
             // console.log(arr);
             return calc(arr);
         }
     }
     console.log(arr);
-    return calc(arr);
+    // return calc(arr);
 }
 
 function clear() {
