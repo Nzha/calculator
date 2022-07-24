@@ -26,8 +26,12 @@ ac.addEventListener('click', clear);
 equal.addEventListener('click', calcResult);
 
 function getKeyboardInput(e) {
-    let digits = /^\d+$/;
+    // let digits = /^\d+$/;
+    // let digits = /^\d*\.?\d+$/;
+    let digits = /\d|\./;
     let operators = /\%|\/|\+|\-|\*|x/;
+
+    console.log(e.key);
 
     // Compare user keyboard input against regex patterns and call correct function
     if (digits.test(e.key)) getNumbers(e);
@@ -139,9 +143,9 @@ function calcResult() {
     // Return an array of the object property values (i.e. numbers and operators)
     inputValues = Object.values(input);
 
-    // Change every number in the array (i.e. every other element) to integer
+    // Change every number in the array (i.e. every other element) to float
     inputValuesInt = inputValues.map((element, index) => {
-        return (index % 2 === 0) ? parseInt(element) : element; 
+        return (index % 2 === 0) ? parseFloat(element) : element; 
     });
 
     finalResult = calc(inputValuesInt);
