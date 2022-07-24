@@ -6,20 +6,11 @@ const ac = document.querySelector('#AC');
 const equal = document.querySelector('#equal');
 
 let input = {};
-// let input = [];
 let numberCount = 1;
 let operatorCount = 1;
 let result = 0;
 
-
-
-let myArray = [];
-myArray.push(input);
-
-
-
 window.addEventListener('keydown', getKeyboardInput);
-
 digits.forEach(digit => digit.addEventListener('click', getNumbers));
 operators.forEach(operator => operator.addEventListener('click', getOperators));
 ac.addEventListener('click', clear);
