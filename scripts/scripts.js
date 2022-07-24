@@ -48,9 +48,13 @@ function getNumbers(e) {
 
 
     console.log(`Input value: ${input[value]}`);
-    // if (input[value].)
-
-
+    // Stop user from inserting more than one decimal point in a given number
+    if (
+        input[value].indexOf('.') !== -1
+        && (e.key === '.' || e.target.textContent === '.')
+    ) {
+        return;
+    }
 
     // User can enter digits via clicking UI or pressing keyboard
     if (e instanceof KeyboardEvent) {
