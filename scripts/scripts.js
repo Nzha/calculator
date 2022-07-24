@@ -136,15 +136,27 @@ function getOperators(e){
 }
 
 function calcResult() {
-    // result = operate(parseInt(input.value1), input.operator1, parseInt(input.value2));
+    result = operate(parseInt(input.value1), input.operator1, parseInt(input.value2));
+    displayBottom.textContent = result;
+    // console.log(result);
 
-   
-    result = Object.values(input);
-    test = result.map((element, index) => {
+    calc();
+}
+
+function calc() {
+
+    result2 = Object.values(input);
+    // console.log(result2);
+    test = result2.map((element, index) => {
         return (index % 2 === 0) ? parseInt(element) : element; 
     });
 
     console.log(test);
+
+    if (test.length === 3) {
+        console.log(operate(test[0], test[1], test[2]));
+        return operate(test[0], test[1], test[2]);
+    }
 
     for (let i = 0; i < test.length; i++) {
         if (test[i] === '*') {
@@ -156,8 +168,6 @@ function calcResult() {
         }
     }
 
-    displayBottom.textContent = result;
-    console.log(result);
 }
 
 function clear() {
