@@ -37,7 +37,6 @@ function getNumbers(e) {
     value = `value${numberCount}`;
     if (!input[value]) input[value] = '';
 
-    // console.log(`Input value: ${input[value]}`);
     // Stop user from inserting more than one decimal point in a given number
     if (
         input[value].indexOf('.') !== -1
@@ -81,6 +80,11 @@ function getOperators(e){
     // Stop user from inserting 2 operators in a row
     let inputValues = Object.values(input);
     for (let i = 0; i < inputValues.length; i++) {
+        /**
+         * Current operator value in loop always empty since after input[operator] = ''
+         * and before input[operator] += e.key or e.target.textContent;
+         * If previous element in loop is also an operator, remove empty value and return
+         */
         if (inputValues[i] === '' && inputValues[i-1].includes('+')) {
             delete input[operator];
             return;
