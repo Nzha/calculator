@@ -20,7 +20,7 @@ myArray.push(input);
 
 window.addEventListener('keydown', getKeyboardInput);
 
-digits.forEach(digit => digit.addEventListener('click', getDigits));
+digits.forEach(digit => digit.addEventListener('click', getNumbers));
 operators.forEach(operator => operator.addEventListener('click', getOperators));
 ac.addEventListener('click', clear);
 equal.addEventListener('click', calcResult);
@@ -30,14 +30,14 @@ function getKeyboardInput(e) {
     let operators = /\%|\/|\+|\-|\*|x/;
 
     // Compare user keyboard input against regex patterns and call correct function
-    if (digits.test(e.key)) getDigits(e);
+    if (digits.test(e.key)) getNumbers(e);
     if (operators.test(e.key)) getOperators(e);
 
     if (e.key === 'Enter') calcResult();
     if (e.key === 'Delete') clear();
 }
 
-function getDigits(e) {
+function getNumbers(e) {
     // Clear display if user has already done an operation and then pick a digit
     if (result !== 0) clear();
 
@@ -136,24 +136,21 @@ function getOperators(e){
 }
 
 function calcResult() {
-    // result = operate(parseInt(input.value1), input.operator1, parseInt(input.value2));
-    // displayBottom.textContent = result;
-    // console.log(result);
+    inputValues = Object.values(input);
 
-
-    result2 = Object.values(input);
-    // console.log(result2);
-    test = result2.map((element, index) => {
+    // Change every number (i.e every other element) to integer
+    inputValuesInt = inputValues.map((element, index) => {
         return (index % 2 === 0) ? parseInt(element) : element; 
     });
-    result = calc(test);
-    displayBottom.textContent = result;
+
+    finalResult = calc(inputValuesInt);
+    displayBottom.textContent = finalResult;
 }
 
 function calc(arr) {
     console.log(arr);
 
-    // Insert operation result in array and remove previous and next value (e.g  [6 + 3] => [9])
+    // Insert operation result in array and remove previous & next value (e.g  [6 + 3] => [9])
     function updateArr(arr, index, newValue) {
         arr.splice(index, 1, newValue)
         arr.splice(index + 1, 1);
@@ -165,7 +162,7 @@ function calc(arr) {
 
     // Loop through array and do multiplications and divisions first
     for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === '*' || arr[i] === '/') {
+        if (arr[i] === '*' || arr[i] === 'x' || arr[i] === '/') {
             resultOp = operate(arr[i-1], arr[i], arr[i+1]);
             updateArr(arr, i, resultOp)
             return calc(arr);
