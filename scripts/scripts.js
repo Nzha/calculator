@@ -28,7 +28,7 @@ equal.addEventListener('click', calcResult);
 function getKeyboardInput(e) {
     // let digits = /^\d+$/;
     // let digits = /^\d*\.?\d+$/;
-    let digits = /\d|\./;
+    let digits = /^\d+$|\./;
     let operators = /\%|\/|\+|\-|\*|x/;
 
     // Compare user keyboard input against regex patterns and call correct function
@@ -46,8 +46,7 @@ function getNumbers(e) {
     value = `value${numberCount}`;
     if (!input[value]) input[value] = '';
 
-
-    console.log(`Input value: ${input[value]}`);
+    // console.log(`Input value: ${input[value]}`);
     // Stop user from inserting more than one decimal point in a given number
     if (
         input[value].indexOf('.') !== -1
@@ -75,53 +74,6 @@ function getOperators(e){
     // Stop user from starting with an operator
     if (!input[value]) return;
 
-
-
-    
-    // for (item in input) {
-    //     // let test = input.indexOf('+');
-    //     // console.log('test');
-
-    //     // pos = myArray.map(function(e) { console.log('test') }).indexOf('operator1');
-    //     // console.log(pos);
-
-    //     console.log(item);
-    // }
-
-    // for (let i = 0; i < Object.keys(input).length; i++) {
-    //     console.log(Object.keys(input)[i]);
-    //     if (Object.keys(input)[i].includes('operator')) {
-    //         console.log('works');
-    //     }
-    // }
-
-    // for (let key in input) {
-    //     console.log(key)
-    //     // if (key.includes('operator')) {
-    //     //     console.log('operator!');
-    //     // }
-    // }
-
-
-    // let keys = Object.keys(input).sort();
-    // let test = keys.indexOf('operator')
-    // console.log(test);
-
-    // console.log(operatorCount);
-    // console.log(`operator${operatorCount}`);
-    // console.log(input[`operator${operatorCount-1}`]);
-
-    // console.log(operatorCount);
-    // if (`operator${operatorCount-1}` in input) {
-    //     console.log('works');
-    // }
-
-    // for (let i = 0; i < myArray.length; i++) {
-    //     console.log(`Test: ${myArray[0]}`);
-    // }
-
-
-
     // Continue operation if user has already done an operation and then pick an operator
     if (result !== 0) {
         for (let key in input) delete input[key];
@@ -132,8 +84,17 @@ function getOperators(e){
         displayBottom.textContent = '';
     }
     // Else start the first operation
-    operator = `operator${operatorCount}`;
+    let operator = `operator${operatorCount}`;
     if (!input[operator]) input[operator] = '';
+
+    // Stop user from inserting 2 operators in a row
+    let inputValues = Object.values(input);
+    for (let i = 0; i < inputValues.length; i++) {
+        if (inputValues[i] === '' && inputValues[i-1].includes('+')) {
+            delete input[operator];
+            return;
+        }
+    }
 
     if (e instanceof KeyboardEvent) {
         input[operator] += e.key;
