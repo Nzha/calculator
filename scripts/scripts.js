@@ -146,6 +146,15 @@ function calcResult() {
 
     console.log(test);
 
+    for (let i = 0; i < test.length; i++) {
+        if (test[i] === '*') {
+            test2 = test[i-1] * test[i+1];
+            test.splice(i, 1, test2)
+            test.splice(i+1, 1);
+            test.splice(i-1, 1);
+            console.log(test);
+        }
+    }
 
     displayBottom.textContent = result;
     console.log(result);
