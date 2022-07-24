@@ -31,8 +31,6 @@ function getKeyboardInput(e) {
     let digits = /\d|\./;
     let operators = /\%|\/|\+|\-|\*|x/;
 
-    console.log(e.key);
-
     // Compare user keyboard input against regex patterns and call correct function
     if (digits.test(e.key)) getNumbers(e);
     if (operators.test(e.key)) getOperators(e);
@@ -47,6 +45,12 @@ function getNumbers(e) {
 
     value = `value${numberCount}`;
     if (!input[value]) input[value] = '';
+
+
+    console.log(`Input value: ${input[value]}`);
+    // if (input[value].)
+
+
 
     // User can enter digits via clicking UI or pressing keyboard
     if (e instanceof KeyboardEvent) {
@@ -148,8 +152,8 @@ function calcResult() {
         return (index % 2 === 0) ? parseFloat(element) : element; 
     });
 
-    finalResult = calc(inputValuesInt);
-    displayBottom.textContent = finalResult;
+    result = calc(inputValuesInt);
+    displayBottom.textContent = result;
 }
 
 function calc(arr) {
