@@ -2,6 +2,7 @@ const digits = document.querySelectorAll('.digits');
 const operators = document.querySelectorAll('.operators.display');
 const displayTop = document.querySelector('.display-top');
 const displayBottom = document.querySelector('.display-bottom');
+const c = document.querySelector('#C');
 const ac = document.querySelector('#AC');
 const equal = document.querySelector('#equal');
 
@@ -13,6 +14,7 @@ let result = 0;
 window.addEventListener('keydown', getKeyboardInput);
 digits.forEach(digit => digit.addEventListener('click', getNumbers));
 operators.forEach(operator => operator.addEventListener('click', getOperators));
+c.addEventListener('click', backspace);
 ac.addEventListener('click', clear);
 equal.addEventListener('click', calcResult);
 
@@ -107,16 +109,16 @@ function calcResult() {
     // Return an array of the object property values (i.e. numbers and operators)
     inputValues = Object.values(input);
 
-    // Change every number in the array (i.e. every other element) to float
+    // Convert numbers in array (i.e. every other element) from string to float
     inputValuesInt = inputValues.map((element, index) => {
         return (index % 2 === 0) ? parseFloat(element) : element; 
     });
 
-    result = calc(inputValuesInt);
+    result = calcOperations(inputValuesInt);
     displayBottom.textContent = result;
 }
 
-function calc(arr) {
+function calcOperations(arr) {
     console.log(arr);
 
     // Insert operation result in array and remove previous & next value (e.g.  [6 + 3] => [9])
@@ -134,7 +136,7 @@ function calc(arr) {
         if (arr[i] === '*' || arr[i] === 'x' || arr[i] === '/' || arr[i] === '%') {
             resultOp = operate(arr[i-1], arr[i], arr[i+1]);
             updateArr(arr, i, resultOp)
-            return calc(arr);
+            return calcOperations(arr);
         }
     }
     console.log(arr);
@@ -144,11 +146,15 @@ function calc(arr) {
         if (arr[i] === '+' || arr[i] === '-') {
             resultOp = operate(arr[i-1], arr[i], arr[i+1]);
             updateArr(arr, i, resultOp)
-            return calc(arr);
+            return calcOperations(arr);
         }
     }
     console.log(arr);
 
+}
+
+function backspace() {
+    console.log('test');
 }
 
 function clear() {
