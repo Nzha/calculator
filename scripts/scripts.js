@@ -71,7 +71,10 @@ function getOperators(e){
         for (let key in input) delete input[key];
         numberCount = 1;
         operatorCount = 1;
-        input.value1 = result;
+
+        // Convert result back to string to use 'includes' function below
+        input.value1 = result.toString();
+
         result = 0;
         displayBottom.textContent = '';
     }
