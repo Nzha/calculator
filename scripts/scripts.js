@@ -83,6 +83,7 @@ function getOperators(e){
     if (!input[operator]) input[operator] = '';
 
     // Stop user from inserting 2 operators in a row
+    const operators = ['+', '-', '/', 'x', '*'];
     let inputValues = Object.values(input);
     for (let i = 0; i < inputValues.length; i++) {
         /**
@@ -90,7 +91,7 @@ function getOperators(e){
          * and before input[operator] += e.key or e.target.textContent;
          * If previous element in loop is also an operator, remove empty value and return
          */
-        if (inputValues[i] === '' && inputValues[i-1].includes('+')) {
+        if (inputValues[i] === '' && operators.some(el => inputValues[i-1].includes(el))) { 
             delete input[operator];
             return;
         }
