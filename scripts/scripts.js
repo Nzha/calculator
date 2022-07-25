@@ -129,9 +129,9 @@ function calc(arr) {
     // If no operation left, return result. Else, keep doing operations.
     if (arr.length === 1) return arr[0];
 
-    // Loop through array and do multiplications and divisions first
+    // Loop through array and do multiplications, divisions, and modulo first
     for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === '*' || arr[i] === 'x' || arr[i] === '/') {
+        if (arr[i] === '*' || arr[i] === 'x' || arr[i] === '/' || arr[i] === '%') {
             resultOp = operate(arr[i-1], arr[i], arr[i+1]);
             updateArr(arr, i, resultOp)
             return calc(arr);
