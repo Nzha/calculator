@@ -159,17 +159,15 @@ function calcOperations(arr) {
 }
 
 function backspace() {
-    // Clear display instead if user has already done an operation
+    // Clear all display instead if a result is already displayed
     if (result !== 0) clear();
 
+    const operators = ['+', '-', '/', 'x', '*'];
+
+    // Loop through input values from end and remove first element then break
     for (let i = Object.values(input).length - 1; i >= 0; i--) {
 
-        console.log(`i: ${Object.values(input)[i]}`);
-        console.log(Object.values(input)[i].slice(0, -1));
-        console.log(`Length: ${Object.values(input)[i].slice(0, -1).length}`);
-
-        const operators = ['+', '-', '/', 'x', '*'];
-
+        // Remove object property if empty and decrease count
         if (Object.values(input)[i].slice(0, -1).length === 0) {
             if (operators.some(el => Object.values(input)[i].includes(el))) {
                 delete input[`operator${operatorCount-1}`];
@@ -180,7 +178,7 @@ function backspace() {
             }
             break;
         }
-
+        // Remove first element encountered from end
         input[`value${numberCount}`] = Object.values(input)[i].slice(0, -1);
         break;
     }
