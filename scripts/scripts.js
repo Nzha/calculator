@@ -159,42 +159,34 @@ function calcOperations(arr) {
 }
 
 function backspace() {
+    // Clear display instead if user has already done an operation
+    if (result !== 0) clear();
 
     for (let i = Object.values(input).length - 1; i >= 0; i--) {
-        // console.log(Object.values(input)[i]);
-        // console.log(Object.values(input)[Object.values(input).length - 1]);
-        // console.log(Object.values(input)[Object.values(input).length - 1].slice(0, -1));
 
         console.log(`i: ${Object.values(input)[i]}`);
         console.log(Object.values(input)[i].slice(0, -1));
         console.log(`Length: ${Object.values(input)[i].slice(0, -1).length}`);
 
-        // if (!Object.values(input)[i]) {
-        //     delete input[value];
-        //     break;
-        // }
+        const operators = ['+', '-', '/', 'x', '*'];
 
-        console.log(`Input value: ${input[value]}`);
         if (Object.values(input)[i].slice(0, -1).length === 0) {
-            delete input[value];
-            // delete input[operator];
+            if (operators.some(el => Object.values(input)[i].includes(el))) {
+                delete input[`operator${operatorCount-1}`];
+                operatorCount > 1 ? operatorCount-- : false;
+            } else {
+                delete input[`value${numberCount}`];
+                numberCount > 1 ? numberCount-- : false;
+            }
             break;
         }
 
-        input[value] = Object.values(input)[i].slice(0, -1);
+        input[`value${numberCount}`] = Object.values(input)[i].slice(0, -1);
         break;
-
-        // delete input[value];
-        // input[value] = input[value].slice(0, -1);
-        // console.log(input[value]);
     }
-
-    // input[value] = input[value].slice(0, -1);
-    // console.log(input[value]);
 
     console.log(input);
     displayTop.textContent = Object.values(input).join(' ');
-    
 }
 
 function clear() {
