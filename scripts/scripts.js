@@ -119,6 +119,10 @@ function calcResult() {
         return (index % 2 === 0) ? parseFloat(element) : element; 
     });
 
+    // Return if operation ends with an operator instead of a digit
+    let lastEl = inputValuesInt[inputValuesInt.length - 1]
+    if (isNaN(lastEl)) return;
+
     result = calcOperations(inputValuesInt);
     displayBottom.textContent = result;
 }
