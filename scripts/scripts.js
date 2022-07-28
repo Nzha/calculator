@@ -7,7 +7,6 @@ const ac = document.querySelector('#AC');
 const equal = document.querySelector('#equal');
 
 let input = {};
-// let input = [];
 let numberCount = 1;
 let operatorCount = 1;
 let result = 0;
@@ -163,13 +162,14 @@ function backspace() {
     if (result !== 0) clear();
 
     const operators = ['+', '-', '/', 'x', '*'];
+    let inputValues = Object.values(input);
 
     // Loop through input values from end and remove first element then break
-    for (let i = Object.values(input).length - 1; i >= 0; i--) {
+    for (let i = inputValues.length - 1; i >= 0; i--) {
 
         // Remove object property if empty and decrease count
-        if (Object.values(input)[i].slice(0, -1).length === 0) {
-            if (operators.some(el => Object.values(input)[i].includes(el))) {
+        if (inputValues[i].slice(0, -1).length === 0) {
+            if (operators.some(el => inputValues[i].includes(el))) {
                 delete input[`operator${operatorCount-1}`];
                 operatorCount > 1 ? operatorCount-- : false;
             } else {
@@ -179,7 +179,7 @@ function backspace() {
             break;
         }
         // Remove first element encountered from end
-        input[`value${numberCount}`] = Object.values(input)[i].slice(0, -1);
+        input[`value${numberCount}`] = inputValues[i].slice(0, -1);
         break;
     }
 
