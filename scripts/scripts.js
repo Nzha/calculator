@@ -37,19 +37,15 @@ function getNumbers(e) {
     // Clear display if user has already done an operation and then pick a digit
     if (result !== 0) clear();
 
-    // Return an array of the object property values (i.e. numbers and operators)
-    inputValues = Object.values(input);
-
-    // Convert numbers in array (i.e. every other element) from string to float
-    inputValuesInt = inputValues.map((element, index) => {
-        return (index % 2 === 0) ? parseFloat(element) : element; 
-    });
-
-    // Return if operation ends with an operator instead of a digit
-    let lastEl = inputValuesInt[inputValuesInt.length - 1]
+    /**
+    * Start a new operand if last element in object is an operator
+    * or is undefined since the very first element will be undefined
+    */
+    let inputFloats = strToFloats(input);
+    lastEl = inputFloats[inputFloats.length - 1]
     if (lastEl !== undefined && isNaN(lastEl)) numberCount++;
-  
-    value = `value${numberCount}`;
+
+      value = `value${numberCount}`;
     if (!input[value]) input[value] = '';
 
     // Stop user from inserting more than one decimal point in a given number
@@ -117,25 +113,17 @@ function getOperators(e){
     }
 
     displayTop.textContent = Object.values(input).join(' ');
-    // numberCount++;
     operatorCount++;
     console.log(input);
 }
 
 function calcResult() {
-    // Return an array of the object property values (i.e. numbers and operators)
-    inputValues = Object.values(input);
-
-    // Convert numbers in array (i.e. every other element) from string to float
-    inputValuesInt = inputValues.map((element, index) => {
-        return (index % 2 === 0) ? parseFloat(element) : element; 
-    });
-
     // Return if operation ends with an operator instead of a digit
-    let lastEl = inputValuesInt[inputValuesInt.length - 1]
+    let inputFloats = strToFloats(input);
+    lastEl = inputFloats[inputFloats.length - 1]
     if (isNaN(lastEl)) return;
 
-    result = calcOperations(inputValuesInt);
+    result = calcOperations(inputFloats);
     displayBottom.textContent = result;
 }
 
@@ -212,6 +200,18 @@ function clear() {
     result = 0;
     displayTop.textContent = '';
     displayBottom.textContent = '';
+}
+
+function strToFloats(object) {
+    // Return an array of the object property values (i.e. numbers and operators)
+    objectValues = Object.values(object);
+
+    // Convert numbers in array (i.e. every other element) from string to float
+    objectValuesFloats = objectValues.map((element, index) => {
+        return (index % 2 === 0) ? parseFloat(element) : element; 
+    });
+
+    return objectValuesFloats;
 }
 
 function operate(x, operator, y) {
