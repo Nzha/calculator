@@ -83,7 +83,7 @@ function getOperators(e){
         operatorCount = 1;
 
         // Convert result back to string to use 'includes' function below
-        input.value1 = result.toString();
+        input.value1 = resultRounded.toString();
 
         result = 0;
         displayTop.textContent = '';
@@ -111,7 +111,8 @@ function calcResult() {
 
     displayTop.textContent = Object.values(input).join(' ');
     result = calcOperations(inputFloats);
-    displayBottom.textContent = result;
+    resultRounded = Math.round((result + Number.EPSILON) * 100) / 100;
+    displayBottom.textContent = resultRounded;
 }
 
 function calcOperations(arr) {
