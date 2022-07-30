@@ -175,7 +175,7 @@ function backspace() {
     }
 
     console.log(input);
-    displayTop.textContent = Object.values(input).join(' ');
+    displayBottom.textContent = Object.values(input).join(' ');
 }
 
 function clear() {
