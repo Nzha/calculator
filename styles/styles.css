@@ -50,6 +50,7 @@ body {
     text-align: right;
     padding: 0.3rem 0.5rem;
     border: 5px solid #5e6b7b;
+    word-break: break-all;
 }
 
 .display-top,
