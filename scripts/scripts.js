@@ -41,7 +41,7 @@ function getNumbers(e) {
     * or is not equal to 'NaN' in case user starts with a decimal point
     */
     let inputFloats = strToFloats(input);
-    lastEl = inputFloats[inputFloats.length - 1]
+    lastEl = lastElement(inputFloats);
     if (isNaN(lastEl) && lastEl !== undefined && !Number.isNaN(lastEl)) numberCount++;
 
     value = `value${numberCount}`;
@@ -73,7 +73,7 @@ function getNumbers(e) {
 function getOperators(e){
     // Stop user from starting with an operator or inserting 2 operators in a row
     let inputFloats = strToFloats(input);
-    lastEl = inputFloats[inputFloats.length - 1]
+    lastEl = lastElement(inputFloats);
     if (isNaN(lastEl)) return;
 
     // Continue operation if user has already done an operation and then pick an operator
@@ -106,7 +106,7 @@ function getOperators(e){
 function calcResult() {
     // Return if operation ends with an operator instead of a digit
     let inputFloats = strToFloats(input);
-    lastEl = inputFloats[inputFloats.length - 1]
+    lastEl = lastElement(inputFloats);
     if (isNaN(lastEl)) return;
 
     result = calcOperations(inputFloats);
@@ -198,6 +198,10 @@ function strToFloats(object) {
     });
 
     return objectValuesFloats;
+}
+
+function lastElement(arr) {
+    return arr[arr.length - 1];
 }
 
 function operate(x, operator, y) {
