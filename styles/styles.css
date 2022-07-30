@@ -51,6 +51,11 @@ body {
     border: 5px solid #5e6b7b;
 }
 
+.display-top,
+.display-bottom {
+    min-height: 1.306em;
+}
+
 .calculator-pad {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

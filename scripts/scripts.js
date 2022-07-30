@@ -66,7 +66,7 @@ function getNumbers(e) {
     * Object.values return an array of object property values separated by a comma
     * Join(' ') returns an array as a string with a white space as separator
     */
-    displayTop.textContent = Object.values(input).join(' ');
+    displayBottom.textContent = Object.values(input).join(' ');
     console.log(input);
 }
 
@@ -86,7 +86,7 @@ function getOperators(e){
         input.value1 = result.toString();
 
         result = 0;
-        displayBottom.textContent = '';
+        displayTop.textContent = '';
     }
     // Else start the first operation
     let operator = `operator${operatorCount}`;
@@ -98,7 +98,7 @@ function getOperators(e){
         input[operator] += e.target.textContent;
     }
 
-    displayTop.textContent = Object.values(input).join(' ');
+    displayBottom.textContent = Object.values(input).join(' ');
     operatorCount++;
     console.log(input);
 }
@@ -109,6 +109,7 @@ function calcResult() {
     lastEl = lastElement(inputFloats);
     if (isNaN(lastEl)) return;
 
+    displayTop.textContent = Object.values(input).join(' ');
     result = calcOperations(inputFloats);
     displayBottom.textContent = result;
 }
