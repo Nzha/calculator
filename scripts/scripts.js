@@ -19,8 +19,6 @@ ac.addEventListener('click', clear);
 equal.addEventListener('click', calcResult);
 
 function getKeyboardInput(e) {
-    // let digits = /^\d+$/;
-    // let digits = /^\d*\.?\d+$/;
     let digits = /^\d+$|\./;
     let operators = /\%|\/|\+|\-|\*|x/;
 
@@ -45,7 +43,7 @@ function getNumbers(e) {
     lastEl = inputFloats[inputFloats.length - 1]
     if (lastEl !== undefined && isNaN(lastEl)) numberCount++;
 
-      value = `value${numberCount}`;
+    value = `value${numberCount}`;
     if (!input[value]) input[value] = '';
 
     // Stop user from inserting more than one decimal point in a given number
@@ -73,7 +71,9 @@ function getNumbers(e) {
 
 function getOperators(e){
     // Stop user from starting with an operator
-    if (!input[value]) return;
+    let inputFloats = strToFloats(input);
+    lastEl = inputFloats[inputFloats.length - 1]
+    if (isNaN(lastEl)) return;
 
     // Continue operation if user has already done an operation and then pick an operator
     if (result !== 0) {
