@@ -36,12 +36,13 @@ function getNumbers(e) {
     if (result !== 0) clear();
 
     /**
-    * Start a new operand if last element in object is an operator
+    * Start a new operand if last element in object is not a number such as an operator
     * or is undefined since the very first element will be undefined
+    * or is not equal to 'NaN' in case user starts with a decimal point
     */
     let inputFloats = strToFloats(input);
     lastEl = inputFloats[inputFloats.length - 1]
-    if (lastEl !== undefined && isNaN(lastEl)) numberCount++;
+    if (isNaN(lastEl) && lastEl !== undefined && !Number.isNaN(lastEl)) numberCount++;
 
     value = `value${numberCount}`;
     if (!input[value]) input[value] = '';
@@ -70,7 +71,7 @@ function getNumbers(e) {
 }
 
 function getOperators(e){
-    // Stop user from starting with an operator
+    // Stop user from starting with an operator or inserting 2 operators in a row
     let inputFloats = strToFloats(input);
     lastEl = inputFloats[inputFloats.length - 1]
     if (isNaN(lastEl)) return;
@@ -90,21 +91,6 @@ function getOperators(e){
     // Else start the first operation
     let operator = `operator${operatorCount}`;
     if (!input[operator]) input[operator] = '';
-
-    // Stop user from inserting 2 operators in a row
-    const operators = ['+', '-', '/', 'x', '*'];
-    let inputValues = Object.values(input);
-    for (let i = 0; i < inputValues.length; i++) {
-        /**
-         * Current operator value in loop always empty since after input[operator] = ''
-         * and before input[operator] += e.key or e.target.textContent;
-         * If previous element in loop is also an operator, remove empty value and return
-         */
-        if (inputValues[i] === '' && operators.some(el => inputValues[i-1].includes(el))) { 
-            delete input[operator];
-            return;
-        }
-    }
 
     if (e instanceof KeyboardEvent) {
         input[operator] += e.key;
@@ -203,10 +189,10 @@ function clear() {
 }
 
 function strToFloats(object) {
-    // Return an array of the object property values (i.e. numbers and operators)
+    // Return an array of the object property values (i.e. operands and operators)
     objectValues = Object.values(object);
 
-    // Convert numbers in array (i.e. every other element) from string to float
+    // Convert operands in array (i.e. every other element) from string to float
     objectValuesFloats = objectValues.map((element, index) => {
         return (index % 2 === 0) ? parseFloat(element) : element; 
     });
