@@ -80,6 +80,10 @@ body {
     background-color: #f2f3f5;
 }
 
+.calculator-pad > *:nth-child(4n-1):nth-last-of-type(1) {
+    grid-column: span 2;
+}
+
 button {
     color: white;
     font-size: 1.5em;
@@ -131,6 +135,11 @@ button:focus-visible {
     background-color: #6b7c8c;
     color: white;
 }
+
+/* .equal {
+    display: grid;
+    grid-template-columns: 2fr;
+} */
 
 .equal-pressed,
 #equal:hover {
