@@ -97,6 +97,7 @@ button:hover {
     background-color: #6b7c8c;
 }
 
+.digits-pressed,
 .digits:hover {
     background-color: #c8cac7;
     color: #212121;
@@ -106,24 +107,28 @@ button:hover {
     background-color: #4e5462;
 }
 
+.operators-pressed,
 .operators:hover {
     background-color: lightblue;
     color: #212121;
 }
 
-#AC {
+.AC {
     background-color: #ef4136;
 }
 
+.AC-pressed,
 #AC:hover {
     background-color: red;
 }
 
+.C-pressed,
 #C:hover {
     background-color: #6b7c8c;
     color: white;
 }
 
+.equal-pressed,
 #equal:hover {
     background-color: green;
     color: white;

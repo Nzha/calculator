@@ -18,13 +18,79 @@ c.addEventListener('click', backspace);
 ac.addEventListener('click', clear);
 equal.addEventListener('click', calcResult);
 
+
+window.addEventListener('keydown', addStyle);
+window.addEventListener('keyup', removeStyle);
+
+function addStyle(e) {
+    let digit = /^\d+$|\./;
+    let operator = /\%|\/|\+|\-|\*|x/;
+    let backspace = /^Backspace$/;
+    let del = /^Delete$/;
+    let enter = /^Enter$/;
+
+    if (digit.test(e.key)) {
+        document.getElementById(`${e.key}`).classList.add('digits-pressed');
+    }
+
+    if (operator.test(e.key) && e.key === 'x') {
+        document.getElementById(`*`).classList.add('operators-pressed');
+    } else
+    if (operator.test(e.key)) {
+        document.getElementById(`${e.key}`).classList.add('operators-pressed');
+    }
+
+    if (backspace.test(e.key)) {
+        document.getElementById('C').classList.add('C-pressed');
+    }
+
+    if (del.test(e.key)) {
+        document.getElementById('AC').classList.add('AC-pressed');
+    }
+
+    if (enter.test(e.key)) {
+        document.getElementById('equal').classList.add('equal-pressed');
+    }
+}
+
+function removeStyle(e) {
+    let digit = /^\d+$|\./;
+    let operator = /\%|\/|\+|\-|\*|x/;
+    let backspace = /^Backspace$/;
+    let del = /^Delete$/;
+    let enter = /^Enter$/;
+
+    if (digit.test(e.key)) {
+        document.getElementById(`${e.key}`).classList.remove('digits-pressed');
+    }
+
+    if (operator.test(e.key) && e.key === 'x') {
+        document.getElementById(`*`).classList.remove('operators-pressed');
+    } else
+    if (operator.test(e.key)) {
+        document.getElementById(`${e.key}`).classList.remove('operators-pressed');
+    }
+    if (backspace.test(e.key)) {
+        document.getElementById('C').classList.remove('C-pressed');
+    }
+
+    if (del.test(e.key)) {
+        document.getElementById('AC').classList.remove('AC-pressed');
+    }
+
+    if (enter.test(e.key)) {
+        document.getElementById('equal').classList.remove('equal-pressed');
+    }
+}
+
+
 function getKeyboardInput(e) {
-    let digits = /^\d+$|\./;
-    let operators = /\%|\/|\+|\-|\*|x/;
+    let digit = /^\d+$|\./;
+    let operator = /\%|\/|\+|\-|\*|x/;
 
     // Compare user keyboard input against regex patterns and call correct function
-    if (digits.test(e.key)) getNumbers(e);
-    if (operators.test(e.key)) getOperators(e);
+    if (digit.test(e.key)) getNumbers(e);
+    if (operator.test(e.key)) getOperators(e);
 
     if (e.key === 'Enter') calcResult();
     if (e.key === 'Backspace') backspace();
