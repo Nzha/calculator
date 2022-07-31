@@ -99,3 +99,13 @@ button {
 .digits {
     background-color: #6b7c8c;
 }
+
+footer a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 0;
+    text-decoration: none;
+    color: black;
+}
