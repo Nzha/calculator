@@ -160,6 +160,26 @@ function calcOperations(arr) {
     console.log(arr);
 }
 
+const add = (x, y) => x + y;
+const subtract = (x, y) => x - y;
+const multiply = (x, y) => x * y;
+const divide = (x, y) => x / y;
+const modulus = (x, y) => x % y;
+
+function operate(x, operator, y) {
+    if (operator === '+') {
+        return add(x, y);
+    } else if (operator === '-') {
+        return subtract(x, y);
+    } else if (operator === 'x' || operator === '*') {
+        return multiply(x, y);
+    } else if (operator === '/') {
+        return divide(x, y);
+    } else if (operator === '%') {
+        return modulus(x, y);
+    }
+}
+
 function backspace() {
     // Clear all display instead if a result is already displayed
     if (result !== 0) clear();
@@ -215,40 +235,6 @@ function strToFloats(object) {
 
 function lastElement(arr) {
     return arr[arr.length - 1];
-}
-
-function operate(x, operator, y) {
-    if (operator === '+') {
-        return add(x, y);
-    } else if (operator === '-') {
-        return subtract(x, y);
-    } else if (operator === 'x' || operator === '*') {
-        return multiply(x, y);
-    } else if (operator === '/') {
-        return divide(x, y);
-    } else if (operator === '%') {
-        return modulus(x, y);
-    }
-}
-
-function add(x, y) {
-    return x + y;
-}
-
-function subtract(x, y) {
-    return x - y;
-}
-
-function multiply(x, y) {
-    return x * y;
-}
-
-function divide(x, y) {
-    return x / y;
-}
-
-function modulus(x, y) {
-    return x % y;
 }
 
 function defineClassName(e) {
