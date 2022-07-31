@@ -6,7 +6,7 @@ const correct = document.querySelector('#C');
 const ac = document.querySelector('#AC');
 const equal = document.querySelector('#equal');
 
-// To validate keyboard input
+// Regex to validate keyboard input
 const digit = new RegExp(/^\d+$|\./);
 const operator = new RegExp(/\%|\/|\+|\-|\*|x/);
 const back = new RegExp(/^Backspace$/);
@@ -73,10 +73,6 @@ function getNumbers(e) {
         input[value] += e.target.textContent;
     }
 
-    /**
-    * Object.values return an array of object property values separated by a comma
-    * Join(' ') returns an array as a string with a white space as separator
-    */
     displayBottom.textContent = Object.values(input).join(' ');
     console.log(input);
 }
@@ -246,9 +242,7 @@ function defineClassName(e) {
 }
 
 function addStyle(e) {
-    // Return if keyboard input not valid
     if (!validInput.test(e.key)) return;
-
     defineClassName(e);
 
     // '*' means 'data-key' attribute includes 'e.key' instead of equals to 'e.key'
