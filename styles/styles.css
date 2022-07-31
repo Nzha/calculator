@@ -86,18 +86,47 @@ button {
     padding: 1rem 0.5rem;
     border: none;
     border-radius: 12px;
+    transition: all .15s ease-in-out;
 }
 
-#AC {
-    background-color: #ef4136;
+button:hover {
+    transform: translateY(-0.2rem);
+}
+
+.digits {
+    background-color: #6b7c8c;
+}
+
+.digits:hover {
+    background-color: #c8cac7;
+    color: #212121;
 }
 
 .operators {
     background-color: #4e5462;
 }
 
-.digits {
+.operators:hover {
+    background-color: lightblue;
+    color: #212121;
+}
+
+#AC {
+    background-color: #ef4136;
+}
+
+#AC:hover {
+    background-color: red;
+}
+
+#C:hover {
     background-color: #6b7c8c;
+    color: white;
+}
+
+#equal:hover {
+    background-color: green;
+    color: white;
 }
 
 footer a {

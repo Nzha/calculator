@@ -187,7 +187,7 @@ function clear() {
     operatorCount = 1;
     result = 0;
     displayTop.textContent = '';
-    displayBottom.textContent = '';
+    displayBottom.textContent = '0';
 }
 
 function strToFloats(object) {
