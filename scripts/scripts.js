@@ -27,55 +27,7 @@ const operator = /\%|\/|\+|\-|\*|x/;
 const back = /^Backspace$/;
 const del = /^Delete$/;
 const enter = /^Enter$/;
-
-function addStyle(e) {
-    if (digit.test(e.key)) {
-        document.getElementById(`${e.key}`).classList.add('digits-pressed');
-    }
-
-    if (operator.test(e.key) && e.key === 'x') {
-        document.getElementById(`*`).classList.add('operators-pressed');
-    } else
-    if (operator.test(e.key)) {
-        document.getElementById(`${e.key}`).classList.add('operators-pressed');
-    }
-
-    if (back.test(e.key)) {
-        document.getElementById('C').classList.add('C-pressed');
-    }
-
-    if (del.test(e.key)) {
-        document.getElementById('AC').classList.add('AC-pressed');
-    }
-
-    if (enter.test(e.key)) {
-        document.getElementById('equal').classList.add('equal-pressed');
-    }
-}
-
-function removeStyle(e) {
-    if (digit.test(e.key)) {
-        document.getElementById(`${e.key}`).classList.remove('digits-pressed');
-    }
-
-    if (operator.test(e.key) && e.key === 'x') {
-        document.getElementById(`*`).classList.remove('operators-pressed');
-    } else
-    if (operator.test(e.key)) {
-        document.getElementById(`${e.key}`).classList.remove('operators-pressed');
-    }
-    if (back.test(e.key)) {
-        document.getElementById('C').classList.remove('C-pressed');
-    }
-
-    if (del.test(e.key)) {
-        document.getElementById('AC').classList.remove('AC-pressed');
-    }
-
-    if (enter.test(e.key)) {
-        document.getElementById('equal').classList.remove('equal-pressed');
-    }
-}
+const regex = /^\d+$|\.|\%|\/|\+|\-|\*|x|Backspace|Delete|Enter/;
 
 function getKeyboardInput(e) {
     // Compare user keyboard input against regex patterns and call correct function
@@ -294,4 +246,28 @@ function divide(x, y) {
 
 function modulus(x, y) {
     return x % y;
+}
+
+function defineClassName(e) {
+    if (digit.test(e.key)) className = 'digits-pressed';
+    if (operator.test(e.key)) className = 'operators-pressed';
+    if (back.test(e.key)) className = 'C-pressed';
+    if (del.test(e.key)) className = 'AC-pressed';
+    if (enter.test(e.key)) className = 'equal-pressed';
+}
+
+function addStyle(e) {
+    // Return if keyboard input not valid
+    if (!regex.test(e.key)) return;
+
+    defineClassName(e);
+
+    // '*' means 'data-key' attribute includes 'e.key' instead of equals to 'e.key'
+    document.querySelector(`button[data-key*="${e.key}"]`).classList.add(className);
+}
+
+function removeStyle(e) {
+    if (!regex.test(e.key)) return;
+    defineClassName(e);
+    document.querySelector(`button[data-key*="${e.key}"]`).classList.remove(className);
 }

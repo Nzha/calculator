@@ -93,6 +93,10 @@ button:hover {
     transform: translateY(-0.2rem);
 }
 
+button:focus-visible {
+    outline: none;
+  }
+
 .digits {
     background-color: #6b7c8c;
 }
