@@ -2,9 +2,19 @@ const digits = document.querySelectorAll('.digits');
 const operators = document.querySelectorAll('.operators.display');
 const displayTop = document.querySelector('.display-top');
 const displayBottom = document.querySelector('.display-bottom');
-const c = document.querySelector('#C');
+const correct = document.querySelector('#C');
 const ac = document.querySelector('#AC');
 const equal = document.querySelector('#equal');
+
+// To validate keyboard input
+const digit = new RegExp(/^\d+$|\./);
+const operator = new RegExp(/\%|\/|\+|\-|\*|x/);
+const back = new RegExp(/^Backspace$/);
+const del = new RegExp(/^Delete$/);
+const enter = new RegExp(/^Enter$/);
+const validInput = new RegExp(
+    digit.source + '|' + operator.source + '|' + back.source + '|' + del.source + '|' + enter.source
+);
 
 let input = {};
 let numberCount = 1;
@@ -18,16 +28,9 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', removeStyle);
 digits.forEach(digit => digit.addEventListener('click', getNumbers));
 operators.forEach(operator => operator.addEventListener('click', getOperators));
-c.addEventListener('click', backspace);
+correct.addEventListener('click', backspace);
 ac.addEventListener('click', clear);
 equal.addEventListener('click', calcResult);
-
-const digit = /^\d+$|\./;
-const operator = /\%|\/|\+|\-|\*|x/;
-const back = /^Backspace$/;
-const del = /^Delete$/;
-const enter = /^Enter$/;
-const regex = /^\d+$|\.|\%|\/|\+|\-|\*|x|Backspace|Delete|Enter/;
 
 function getKeyboardInput(e) {
     // Compare user keyboard input against regex patterns and call correct function
@@ -50,7 +53,7 @@ function getNumbers(e) {
     */
     let inputFloats = strToFloats(input);
     lastEl = lastElement(inputFloats);
-    if (isNaN(lastEl) && lastEl !== undefined && !Number.isNaN(lastEl)) numberCount++;
+    if (isNaN(lastEl) && lastEl !== undefined && !Number.isNaN(lastEl)) numberCount += 1;
 
     value = `value${numberCount}`;
     if (!input[value]) input[value] = '';
@@ -107,7 +110,7 @@ function getOperators(e){
     }
 
     displayBottom.textContent = Object.values(input).join(' ');
-    operatorCount++;
+    operatorCount += 1;
     console.log(input);
 }
 
@@ -258,7 +261,7 @@ function defineClassName(e) {
 
 function addStyle(e) {
     // Return if keyboard input not valid
-    if (!regex.test(e.key)) return;
+    if (!validInput.test(e.key)) return;
 
     defineClassName(e);
 
@@ -267,7 +270,7 @@ function addStyle(e) {
 }
 
 function removeStyle(e) {
-    if (!regex.test(e.key)) return;
+    if (!validInput.test(e.key)) return;
     defineClassName(e);
     document.querySelector(`button[data-key*="${e.key}"]`).classList.remove(className);
 }
